@@ -2,6 +2,8 @@
 using DnsClient;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Helvegr {
 
@@ -41,6 +43,20 @@ namespace Helvegr {
                 Console.WriteLine(ex);
             }
           
+
+           /* byte[] bytes = Encoding.Unicode.GetBytes("^a{V[bNwYq5d>gw&c4:fw(>~5'Et<SFc;hDpL8\\!");
+            SHA256Managed hashstring = new SHA256Managed();
+            byte[] hash = hashstring.ComputeHash(bytes);
+            string hashString = string.Empty;
+            foreach (byte x in hash)
+            {
+                hashString += String.Format("{0:x2}", x);
+            }
+
+            Console.WriteLine(hashString);*/
+            /*Flags flags = new Flags();
+
+            flags.Parse(args);*/
 
         }
     }
