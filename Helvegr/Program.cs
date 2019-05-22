@@ -11,7 +11,7 @@ namespace Helvegr {
 
         static void Main(string[] args) {
 
-            string[] flags = { "--to", "--from", "--subject", "--message" };
+            /*string[] flags = { "--to", "--from", "--subject", "--message" };
 
             Dictionary<string, string> values = new Dictionary<string, string>();
 
@@ -35,13 +35,18 @@ namespace Helvegr {
 
             try {
                 // Create an instance of SMTP client and send the email
-                SMTPClient client = new SMTPClient(email, "/opt/helvegr/certs/", QueryType.MX);
+                SMTPClient smtp = new SMTPClient(email, 25, "/home/chri656v/HellMail/certs/", QueryType.MX);
                 // Start the client
-                client.Start();
-      
+                smtp.Start();
+
+                POPClient hpop = new POPClient("christian@hellmail.dk", "1234", 110, "/home/chri656v/HellMail/certs/", QueryType.MX);
+
+                hpop.Start();
+
+
             } catch (Exception ex) {
                 Console.WriteLine(ex);
-            }
+            }*/
           
 
            /* byte[] bytes = Encoding.Unicode.GetBytes("^a{V[bNwYq5d>gw&c4:fw(>~5'Et<SFc;hDpL8\\!");
@@ -54,9 +59,28 @@ namespace Helvegr {
             }
 
             Console.WriteLine(hashString);*/
-            /*Flags flags = new Flags();
+            Flags flags = new Flags();
 
-            flags.Parse(args);*/
+            flags.Parse(args);
+
+            try {
+
+                if (flags.command == "smtp") {
+                    // Create an instance of SMTP client and send the email
+                    SMTPClient smtp = new SMTPClient(flags, 25, "/home/chri656v/HellMail/certs/", QueryType.MX);
+                    // Start the client
+                    smtp.Start();
+
+                } else if (flags.command == "hpop") {
+
+                     POPClient hpop = new POPClient(flags, 110, "/home/chri656v/HellMail/certs/", QueryType.MX);
+                     
+                     hpop.Start();
+                }
+
+            } catch (Exception ex) {
+                Console.WriteLine(ex);
+            }
 
         }
     }

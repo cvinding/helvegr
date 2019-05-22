@@ -12,6 +12,10 @@ namespace Helvegr {
         public string From { get; set; }
         public string Subject { get; set; }
 
+        // Optional mail tags
+        public string Cc { get; set; }
+        public string Bcc { get; set; }
+
         public string Message { get; set; }
 
         private readonly string[] Required = { "To" , "From", "Subject" };
@@ -20,16 +24,16 @@ namespace Helvegr {
         public EmailTags(Dictionary<string, string> values) {
 
             string tempValue = String.Empty;
-
+            
             foreach (var prop in this.GetType().GetProperties()) {
-                           
-                if(prop.Name.StartsWith("_", StringComparison.CurrentCulture)) {
+
+                if (prop.Name.StartsWith("_", StringComparison.CurrentCulture)) {
                     continue;
                 }
                 
-                if(!values.TryGetValue(prop.Name, out tempValue)) {
+                if (!values.TryGetValue(prop.Name, out tempValue)) {
 
-                    if(Array.IndexOf(this.Required, prop.Name) >= 0) {
+                    if (Array.IndexOf(this.Required, prop.Name) >= 0) {
                         throw new Exception("Required missing parameter: " + prop.Name);
                     }
 
@@ -37,13 +41,10 @@ namespace Helvegr {
                 }
 
                 prop.SetValue(this, tempValue);
-
             }
 
             _Domain = To.Split("@")[1];
         }
-
-        //private string attachment { get; set; }
 
         // Create the EMAIL from the email tags
         public string CreateMail() {
@@ -52,9 +53,18 @@ namespace Helvegr {
             mail += "To: " + To + "\n";
             mail += "From: " + From + "\n";
             mail += "Subject: " + Subject + "\n";
+
+            if(Cc != null) {
+                mail += "Cc: " + Cc + "\n";
+            }
+
+            if (Bcc != null) {
+                mail += "Bcc: " + Bcc + "\n";
+            }
+
             mail += "\n";
 
-            if(Message.Length != 0) {
+            if(Message != null) {
                 mail += Message + "\n";
             }
            
@@ -62,7 +72,6 @@ namespace Helvegr {
 
             return mail;
         }
-
 
     }
 }

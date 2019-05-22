@@ -7,9 +7,11 @@ namespace Helvegr {
     public class SMTPClient : TCPClient {
 
         private readonly EmailTags email;
+        private readonly Flags flags;
 
-        public SMTPClient(EmailTags email, string clientCertificatePath, QueryType type) : base(email._Domain, clientCertificatePath, type) {
-            this.email = email;
+        public SMTPClient(Flags flags, int portNumber, string clientCertificatePath, QueryType type) : base((new EmailTags(flags.arguments))._Domain, portNumber, clientCertificatePath, type) {
+            this.flags = flags;
+            this.email = new EmailTags(flags.arguments);
         }
 
         // The method for handling all our SMTP communication with our SMTP server
