@@ -1,5 +1,5 @@
 # helvegr
-A CLI program for interacting with the <a href="https://github.com/czvr0/hellmaild">hellmaild</a> daemon
+A CLI program for interacting with the <a href="https://github.com/czvr0/hellmaild">hellmail daemon</a>
 * C# .NET Core 2.2
 
 # Libraries
