@@ -1,7 +1,6 @@
 # helvegr
 A CLI program for interacting with the <a href="https://github.com/czvr0/hellmaild">hellmaild</a> daemon
-* C#
-* .NET Core
+* C# .NET Core 2.2
 
 # Libraries
 * DnsClient https://github.com/MichaCo/DnsClient.NET
