@@ -41,7 +41,7 @@ namespace Helvegr {
         // Start our TCPClient
         public void Start() {
             // Find the server
-            TcpClient server = new TcpClient(serverHostName, portNumber);
+            TcpClient server = new TcpClient(serverHostName, portNumber); //new TcpClient(serverHostName, portNumber);
 
             // Start the sslstream
             SslStream stream = new SslStream(server.GetStream(), false, (a, b, c, d) => true);
@@ -129,7 +129,7 @@ namespace Helvegr {
                 }
 
             }
-
+            
             // If there is no mailserver throw an exception
             throw new Exception("No mail server available");
         }
