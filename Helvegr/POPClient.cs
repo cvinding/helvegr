@@ -32,8 +32,8 @@ namespace Helvegr {
                 Environment.Exit(1);
             }
 
-            // Authenticate
-            StreamWrite(stream, "APOP " + flags.arguments["Username"] + " 1234");
+            // Authenticate 
+            StreamWrite(stream, "APOP " + flags.arguments["Username"] + " " + flags.arguments["Password"]);
 
             // Check if successful
             if(!StreamRead(stream).Contains("+OK maildrop")) {
