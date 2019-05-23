@@ -12,6 +12,8 @@ namespace Helvegr {
             Flags flags = new Flags();
             flags.Parse(args);
 
+            string certPath = "/opt/helvegr/certs/";
+
             try {
 
                 string isInteractive;
@@ -27,7 +29,7 @@ namespace Helvegr {
                 // If smtp are set && --interactive are not set, else if check if hpop are set
                 if (flags.command == "smtp" && !flags.arguments.TryGetValue("--interactive", out isInteractive)) {
                     // Create an instance of SMTP client and send the email
-                    SMTPClient smtp = new SMTPClient(flags, port, "/home/chri656v/HellMail/certs/", QueryType.MX);
+                    SMTPClient smtp = new SMTPClient(flags, port, certPath, QueryType.MX);
                     // Start the client
                     smtp.Start();
 
@@ -46,7 +48,7 @@ namespace Helvegr {
                     }
 
                     // Start hpop server
-                    POPClient hpop = new POPClient(flags, port, "/home/chri656v/HellMail/certs/", QueryType.MX);
+                    POPClient hpop = new POPClient(flags, port, certPath, QueryType.MX);
                     hpop.Start();
 
                 } else if (flags.arguments.TryGetValue("--interactive", out isInteractive)) {
@@ -68,13 +70,13 @@ namespace Helvegr {
                         flags.arguments.Add("Subject", "-1");
 
                         // Create an instance of SMTP client and send the email
-                        SMTPClient smtp = new SMTPClient(flags, port, "/home/chri656v/HellMail/certs/", QueryType.MX);
+                        SMTPClient smtp = new SMTPClient(flags, port, certPath, QueryType.MX);
                         // Start the client
                         smtp.Start();
 
                     } else if (flags.command == "hpop") {
 
-                        POPClient hpop = new POPClient(flags, port, "/home/chri656v/HellMail/certs/", QueryType.MX);
+                        POPClient hpop = new POPClient(flags, port, certPath, QueryType.MX);
 
                         hpop.Start();
                     }
